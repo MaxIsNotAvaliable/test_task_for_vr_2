@@ -34,13 +34,13 @@ public:
 	virtual ~IObject() = default;
 };
 
-class Shere : public IObject
+class Sphere : public IObject
 {
 private:
 	float radius;
 
 public:
-	Shere(float radius) : radius(radius) {}
+	Sphere(float radius) : radius(radius) {}
 
 	const float GetArea() const override
 	{

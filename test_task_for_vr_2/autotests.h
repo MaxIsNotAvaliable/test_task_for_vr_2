@@ -89,7 +89,7 @@ namespace autotests
 
         std::vector<std::unique_ptr<IObject>> objects;
         objects.emplace_back(std::make_unique<Rectangle>(10, 20));
-        objects.emplace_back(std::make_unique<Shere>(5));
+        objects.emplace_back(std::make_unique<Sphere>(5));
         objects.emplace_back(std::make_unique<Triangle>(3, 4, 5));
 
         std::sort(objects.begin(), objects.end(), [](const auto& a, const auto& b) { return *a < *b; });

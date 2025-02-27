@@ -20,7 +20,22 @@
 	демонстрирующими работу приложения при различных граничных условиях задачи
 */
 
+#pragma region OBJECT_UTILS
 
+void SortObjects(std::vector<std::unique_ptr<IObject>>& objects)
+{
+	std::sort(objects.begin(), objects.end(), [](const auto& a, const auto& b) { return *a < *b; });
+}
+
+void PrintObjects(const std::vector<std::unique_ptr<IObject>>& objects)
+{
+	for (size_t i = 0; i < objects.size(); i++)
+	{
+		printf("[%lld]\t%s\t\tarea %.3f\n", i, objects[i]->GetName().c_str(), objects[i]->GetArea());
+	}
+}
+
+#pragma endregion // OBJECT_UTILS
 
 int main(int argc, char* argv[])
 {
@@ -28,22 +43,16 @@ int main(int argc, char* argv[])
 
 	std::vector<std::unique_ptr<IObject>> objects;
 
+	objects.emplace_back(std::make_unique<Sphere>(5));
 	objects.emplace_back(std::make_unique<Rectangle>(10, 20));
-	objects.emplace_back(std::make_unique<Shere>(5));
 	objects.emplace_back(std::make_unique<Triangle>(3, 4, 5));
 
-	for (const auto& obj : objects)
-	{
-		printf("%s area %.6f\n", obj->GetName().c_str(), obj->GetArea());
-	}
+	PrintObjects(objects);
 
 	printf("--- SORT ---\n");
-	std::sort(objects.begin(), objects.end(), [](const auto& a, const auto& b) { return *a < *b; });
+	SortObjects(objects);
 
-	for (const auto& obj : objects)
-	{
-		printf("%s area %.6f\n", obj->GetName().c_str(), obj->GetArea());
-	}
+	PrintObjects(objects);
 
 	autotests::RunTests();
 	return 0;
