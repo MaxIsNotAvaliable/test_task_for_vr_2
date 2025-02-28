@@ -5,7 +5,6 @@
 
 #include <cmath>
 #include <string>
-#include <format>
 #include <algorithm>
 
 const float pi = acosf(0) * 2;
@@ -49,7 +48,9 @@ public:
 
 	const std::string GetName() const override
 	{
-		return std::format("Sphere r{}", radius);
+		char buf[0x100] = { '\0' };
+		sprintf_s(buf, 0x100, "Sphere\t\tr%.2f\t", radius);
+		return std::string(buf);
 	}
 };
 
@@ -74,7 +75,9 @@ public:
 
 	const std::string GetName() const override
 	{
-		return std::format("Triangle {}x{}x{}", lenA, lenB, lenC);
+		char buf[0x100] = { '\0' };
+		sprintf_s(buf, 0x100, "Triangle\t%.2fx%.2fx%.2f", lenA, lenB, lenC);
+		return std::string(buf);
 	}
 };
 
@@ -94,7 +97,9 @@ public:
 
 	const std::string GetName() const override
 	{
-		return std::format("Rectangle {}x{}", lenA, lenB);
+		char buf[0x100] = { '\0' };
+		sprintf_s(buf, 0x100, "Rectangle\t%.2fx%.2f", lenA, lenB);
+		return std::string(buf);
 	}
 };
 
